@@ -1,0 +1,939 @@
+{
+  "info": {
+    "name": "Business Network API",
+    "description": "API para red de networking empresarial",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000/api"
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Test User\",\n  \"email\": \"test@example.com\",\n  \"password\": \"password\",\n  \"password_confirmation\": \"password\",\n  \"position\": \"Developer\",\n  \"company_id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/register",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"juan@example.com\",\n  \"password\": \"password\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Me",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/me",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "me"]
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/logout",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "logout"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "List Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/users",
+              "host": ["{{base_url}}"],
+              "path": ["users"]
+            }
+          }
+        },
+        {
+          "name": "User Suggestions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/users/suggestions",
+              "host": ["{{base_url}}"],
+              "path": ["users", "suggestions"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Posts",
+      "item": [
+        {
+          "name": "List Posts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/posts",
+              "host": ["{{base_url}}"],
+              "path": ["posts"]
+            }
+          }
+        },
+        {
+          "name": "Create Post",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"¡Hola networking community!\",\n  \"type\": \"text\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/posts",
+              "host": ["{{base_url}}"],
+              "path": ["posts"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Connections",
+      "item": [
+        {
+          "name": "My Connections",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/connections",
+              "host": ["{{base_url}}"],
+              "path": ["connections"]
+            }
+          }
+        },
+        {
+          "name": "Send Connection Request",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_id\": 2,\n  \"message\": \"Me gustaría conectar contigo\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/connections",
+              "host": ["{{base_url}}"],
+              "path": ["connections"]
+            }
+          }
+        },
+        {
+          "name": "Pending Connections",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/connections/pending",
+              "host": ["{{base_url}}"],
+              "path": ["connections", "pending"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Events",
+      "item": [
+        {
+          "name": "List Events",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/events",
+              "host": ["{{base_url}}"],
+              "path": ["events"]
+            }
+          }
+        },
+        {
+          "name": "Create Event",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Networking Tech Meetup\",\n  \"description\": \"Evento de networking para profesionales tech\",\n  \"type\": \"networking\",\n  \"format\": \"in_person\",\n  \"start_date\": \"2025-09-15 18:00:00\",\n  \"end_date\": \"2025-09-15 21:00:00\",\n  \"max_attendees\": 50,\n  \"price\": 0\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/events",
+              "host": ["{{base_url}}"],
+              "path": ["events"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Profile",
+      "item": [
+        {
+          "name": "Get Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/profile",
+              "host": ["{{base_url}}"],
+              "path": ["profile"]
+            }
+          }
+        },
+        {
+          "name": "Update Basic Info",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Juan Pérez Actualizado\",\n  \"phone\": \"+34 91 123 4567\",\n  \"direct_phone\": \"+34 600 123 456\",\n  \"location\": \"Madrid, España\",\n  \"bio\": \"Emprendedor y CEO con experiencia en tecnología\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/profile/basic",
+              "host": ["{{base_url}}"],
+              "path": ["profile", "basic"]
+            }
+          }
+        },
+        {
+          "name": "Update Professional Info",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"position\": \"CEO\",\n  \"specialty\": \"Dirección Estratégica\",\n  \"professional_group\": \"Ejecutivos\",\n  \"business_description\": \"Lideramos la transformación digital\",\n  \"skills\": [\"Liderazgo\", \"Estrategia\", \"Tecnología\"],\n  \"keywords\": [\"CEO\", \"Liderazgo\", \"Innovación\"]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/profile/professional",
+              "host": ["{{base_url}}"],
+              "path": ["profile", "professional"]
+            }
+          }
+        },
+        {
+          "name": "Get Profile Stats",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/profile/stats",
+              "host": ["{{base_url}}"],
+              "path": ["profile", "stats"]
+            }
+          }
+        },
+        {
+          "name": "Search by Keywords",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/profile/search?keywords=tecnología,desarrollo",
+              "host": ["{{base_url}}"],
+              "path": ["profile", "search"],
+              "query": [
+                {
+                  "key": "keywords",
+                  "value": "tecnología,desarrollo"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Companies",
+      "item": [
+        {
+          "name": "List Companies",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/companies",
+              "host": ["{{base_url}}"],
+              "path": ["companies"]
+            }
+          }
+        },
+        {
+          "name": "Get Company",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/companies/techcorp-solutions",
+              "host": ["{{base_url}}"],
+              "path": ["companies", "techcorp-solutions"]
+            }
+          }
+        },
+        {
+          "name": "Create Company",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Nueva Empresa Tech\",\n  \"description\": \"Empresa de tecnología innovadora\",\n  \"industry\": \"Tecnología\",\n  \"size\": \"medium\",\n  \"email\": \"info@nuevaempresa.com\",\n  \"website\": \"https://nuevaempresa.com\",\n  \"phone\": \"+34 91 000 0000\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/companies",
+              "host": ["{{base_url}}"],
+              "path": ["companies"]
+            }
+          }
+        },
+        {
+          "name": "Get Company Stats",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/companies/techcorp-solutions/stats",
+              "host": ["{{base_url}}"],
+              "path": ["companies", "techcorp-solutions", "stats"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "One-to-One Meetings",
+      "item": [
+        {
+          "name": "List Meetings",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/meetings",
+              "host": ["{{base_url}}"],
+              "path": ["meetings"]
+            }
+          }
+        },
+        {
+          "name": "List Meetings by Date Range",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/meetings?start_date=2025-08-01&end_date=2025-08-31",
+              "host": ["{{base_url}}"],
+              "path": ["meetings"],
+              "query": [
+                {
+                  "key": "start_date",
+                  "value": "2025-08-01"
+                },
+                {
+                  "key": "end_date",
+                  "value": "2025-08-31"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Meeting Request",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requested_id\": 2,\n  \"meeting_date\": \"2025-08-15 10:00:00\",\n  \"location\": \"Oficina Central, Sala A\",\n  \"meeting_type\": \"in_person\",\n  \"purpose\": \"Discutir oportunidades de colaboración\",\n  \"agenda\": \"Presentación de servicios, identificación de sinergias\",\n  \"priority\": \"high\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/meetings",
+              "host": ["{{base_url}}"],
+              "path": ["meetings"]
+            }
+          }
+        },
+        {
+          "name": "Accept Meeting",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"confirmed_date\": \"2025-08-15 10:00:00\",\n  \"location\": \"Oficina Central, Sala A\",\n  \"notes\": \"Perfecto, nos vemos allí\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/meetings/1/accept",
+              "host": ["{{base_url}}"],
+              "path": ["meetings", "1", "accept"]
+            }
+          }
+        },
+        {
+          "name": "Complete Meeting",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"notes\": \"Excelente reunión, identificamos varias oportunidades\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/meetings/1/complete",
+              "host": ["{{base_url}}"],
+              "path": ["meetings", "1", "complete"]
+            }
+          }
+        },
+        {
+          "name": "Get Meeting Stats",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/meetings/stats",
+              "host": ["{{base_url}}"],
+              "path": ["meetings", "stats"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Referral Cards",
+      "item": [
+        {
+          "name": "List Referrals",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/referrals",
+              "host": ["{{base_url}}"],
+              "path": ["referrals"]
+            }
+          }
+        },
+        {
+          "name": "List Sent Referrals",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/referrals?direction=sent",
+              "host": ["{{base_url}}"],
+              "path": ["referrals"],
+              "query": [
+                {
+                  "key": "direction",
+                  "value": "sent"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Create Referral Card",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"meeting_id\": 1,\n  \"to_user_id\": 2,\n  \"referral_date\": \"2025-08-04\",\n  \"referral_description\": \"Empresa de desarrollo que necesita servicios de marketing digital\",\n  \"referral_type\": \"external\",\n  \"contact_name\": \"Ana García\",\n  \"contact_phone\": \"+34 91 555 0123\",\n  \"contact_email\": \"ana@empresa.com\",\n  \"interest_level\": \"high\",\n  \"comments\": \"Muy interesada, presupuesto disponible\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/referrals",
+              "host": ["{{base_url}}"],
+              "path": ["referrals"]
+            }
+          }
+        },
+        {
+          "name": "Send Referral",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/referrals/1/send",
+              "host": ["{{base_url}}"],
+              "path": ["referrals", "1", "send"]
+            }
+          }
+        },
+        {
+          "name": "Get Referrals by Meeting",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/referrals/meeting/1",
+              "host": ["{{base_url}}"],
+              "path": ["referrals", "meeting", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Referral Stats",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/referrals/stats",
+              "host": ["{{base_url}}"],
+              "path": ["referrals", "stats"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Business Recommendations",
+      "item": [
+        {
+          "name": "List Recommendations",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/recommendations",
+              "host": ["{{base_url}}"],
+              "path": ["recommendations"]
+            }
+          }
+        },
+        {
+          "name": "Create Recommendation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"recommended_to_id\": 2,\n  \"recommended_user_id\": 3,\n  \"recommendation_date\": \"2025-08-04\",\n  \"business_description\": \"Especialista en marketing digital con gran experiencia en el sector tecnológico\",\n  \"why_recommended\": \"He trabajado con él y su expertise es excepcional\",\n  \"recommendation_type\": \"service_provider\",\n  \"priority_level\": \"high\",\n  \"estimated_value\": 15000\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/recommendations",
+              "host": ["{{base_url}}"],
+              "path": ["recommendations"]
+            }
+          }
+        },
+        {
+          "name": "Mark as Contacted",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"follow_up_notes\": \"Contacté y tuvimos una primera reunión muy positiva\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/recommendations/1/contact",
+              "host": ["{{base_url}}"],
+              "path": ["recommendations", "1", "contact"]
+            }
+          }
+        },
+        {
+          "name": "Get Recommendation Stats",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/recommendations/stats",
+              "host": ["{{base_url}}"],
+              "path": ["recommendations", "stats"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "One-to-One Follow-ups",
+      "item": [
+        {
+          "name": "List Follow-ups",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/follow-ups",
+              "host": ["{{base_url}}"],
+              "path": ["follow-ups"]
+            }
+          }
+        },
+        {
+          "name": "Create Follow-up",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"met_with_user_id\": 2,\n  \"group_name\": \"BNI EXS Supera\",\n  \"location\": \"Café Central Madrid\",\n  \"meeting_date\": \"2025-08-04\",\n  \"conversation_topics\": \"Discutimos oportunidades de colaboración y intercambiamos experiencias sobre gestión de equipos técnicos\",\n  \"meeting_type\": \"coffee_chat\",\n  \"duration_minutes\": 90,\n  \"outcome\": \"excellent\",\n  \"business_opportunities\": \"Posible colaboración en proyecto de transformación digital\",\n  \"future_meeting_planned\": true,\n  \"next_meeting_date\": \"2025-08-18\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/follow-ups",
+              "host": ["{{base_url}}"],
+              "path": ["follow-ups"]
+            }
+          }
+        },
+        {
+          "name": "Get Follow-up Stats",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/follow-ups/stats",
+              "host": ["{{base_url}}"],
+              "path": ["follow-ups", "stats"]
+            }
+          }
+        },
+        {
+          "name": "Get Business Opportunities",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/follow-ups/opportunities",
+              "host": ["{{base_url}}"],
+              "path": ["follow-ups", "opportunities"]
+            }
+          }
+        },
+        {
+          "name": "Get Upcoming Meetings",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/follow-ups/upcoming",
+              "host": ["{{base_url}}"],
+              "path": ["follow-ups", "upcoming"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
